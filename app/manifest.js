@@ -2,8 +2,8 @@ import { getSite } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
-export default function manifest() {
-  const site = getSite();
+export default async function manifest() {
+  const site = await getSite();
   return {
     name: site.meta?.title || "Sampath",
     short_name: site.meta?.author || "Sampath",

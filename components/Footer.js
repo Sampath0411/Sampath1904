@@ -11,8 +11,8 @@ const LINKS = [
   { label: "Privacy", href: "/privacy" },
 ];
 
-export default function Footer() {
-  const site = getSite();
+export default async function Footer() {
+  const site = await getSite();
   return (
     <footer>
       <div className="wrap">

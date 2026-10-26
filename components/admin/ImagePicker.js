@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 /**
- * Image field with direct URL entry + one-click upload to /public/uploads.
+ * Image field with direct URL entry + one-click upload to the configured storage adapter.
  */
 export default function ImagePicker({ label, value, onChange, hint }) {
   const [busy, setBusy] = useState(false);

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { shouldScheduleParticleFrame } from '@/lib/particle-motion';
 import './Particles.css';
 
 const SHAPES = { circle: 0, square: 1, ring: 2, sparkle: 3 };
@@ -404,7 +405,8 @@ const Particles = ({
     gl.bindVertexArray(null);
 
     const probe = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
-    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    const motionQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    let reduce = motionQuery?.matches ?? false;
     const cache = new Map();
     const parse = value => {
       if (cache.has(value)) return cache.get(value);
@@ -722,6 +724,11 @@ const Particles = ({
       raf = 0;
       if (!visible || document.hidden) return;
       const s = settingsRef.current;
+      if (reduce) {
+        state.reveal = 1;
+        render();
+        return;
+      }
       const dt = last ? clamp((now - last) / 1000, 0.0005, 0.05) : 1 / 60;
       last = now;
       if (s.paused) {
@@ -754,7 +761,7 @@ const Particles = ({
       else if (state.reveal < 1) state.reveal = Math.min(1, state.reveal + dt / INTRO_SECONDS);
 
       render();
-      raf = requestAnimationFrame(frame);
+      if (shouldScheduleParticleFrame(reduce)) raf = requestAnimationFrame(frame);
     };
 
     const wake = () => {
@@ -818,6 +825,19 @@ const Particles = ({
       wake();
     };
 
+    const onMotionPreference = event => {
+      reduce = event.matches;
+      if (reduce) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+        state.reveal = 1;
+        render();
+      } else {
+        last = 0;
+        wake();
+      }
+    };
+
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
     const intersection = new IntersectionObserver(entries => {
@@ -834,6 +854,8 @@ const Particles = ({
     window.addEventListener('pointercancel', onPointerUp, { passive: true });
     document.documentElement.addEventListener('pointerleave', onPointerLeave);
     document.addEventListener('visibilitychange', onVisibility);
+    if (motionQuery?.addEventListener) motionQuery.addEventListener('change', onMotionPreference);
+    else motionQuery?.addListener?.(onMotionPreference);
     resize();
 
     let lastDpr = settingsRef.current.dpr;
@@ -859,12 +881,16 @@ const Particles = ({
       window.removeEventListener('pointercancel', onPointerUp);
       document.documentElement.removeEventListener('pointerleave', onPointerLeave);
       document.removeEventListener('visibilitychange', onVisibility);
+      if (motionQuery?.removeEventListener) motionQuery.removeEventListener('change', onMotionPreference);
+      else motionQuery?.removeListener?.(onMotionPreference);
       gl.deleteProgram(dots.program);
       gl.deleteProgram(lines.program);
       [corners, positionBuffer, randomBuffer, colorBuffer, lineBuffer].forEach(buffer => gl.deleteBuffer(buffer));
       gl.deleteVertexArray(dotVao);
       gl.deleteVertexArray(lineVao);
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
+      // Do not force-loss the canvas context here. React Strict Mode replays
+      // effect cleanup/setup on the same canvas in development; a lost context
+      // cannot be reused by the second setup and the canvas may paint white.
     };
   }, []);
 

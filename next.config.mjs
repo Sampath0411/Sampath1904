@@ -5,7 +5,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Uploaded images live in public/uploads and are served as-is.
+  // Uploaded images are routed through the local file store or Supabase Storage.
   images: { unoptimized: true },
   // Pin the project root so Turbopack doesn't walk up into the home directory.
   turbopack: { root: __dirname },

@@ -29,7 +29,7 @@ export default function StatCounter({ value, label }) {
       colors={["#C8FF00", "#ffffff", "#FF3D00"]}
     >
       <b className="stat-num">
-        <CountUp to={num} suffix={suffix} duration={1.6} easing="easeOut" separator="" />
+        <CountUp to={num} initialValue={num} suffix={suffix} duration={1.6} easing="easeOut" separator="" trigger="load" />
       </b>
       <span>{label}</span>
     </BorderGlow>

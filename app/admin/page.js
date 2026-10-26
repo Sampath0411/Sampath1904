@@ -19,9 +19,9 @@ export default async function AdminPage() {
   return (
     <main>
       <AdminPanel
-        initialSite={getSite()}
-        initialProjects={getProjects()}
-        initialMessages={getMessages()}
+        initialSite={await getSite()}
+        initialProjects={await getProjects()}
+        initialMessages={await getMessages()}
       />
     </main>
   );

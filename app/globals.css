@@ -1,6 +1,7 @@
 :root{--bg:#0A0A0A;--lime:#C8FF00;--red:#FF3D00;--txt:#F2F2EC;--mute:#9a9a94;--glass:rgba(255,255,255,.05);--line:rgba(255,255,255,.14);--pill:999px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+html,body{background-color:#0A0A0A}
 body{background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;line-height:1.5;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}

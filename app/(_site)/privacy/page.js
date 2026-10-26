@@ -1,14 +1,16 @@
 import { getSite } from "@/lib/data";
 import { siteBase } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
   return {
-    title: "Privacy Policy | Sampath",
-    description:
-      "No trackers, no ad pixels, no analytics. What this portfolio site collects, how long it's kept, and how to reach me about your data.",
-    alternates: { canonical: `${siteBase()}/privacy` },
+    ...buildPageMetadata({
+      title: "Privacy Policy | Sampath",
+      description: "What data the portfolio contact form collects, how it is used, and how to request deletion.",
+      path: "/privacy",
+    }, siteBase()),
     robots: { index: true, follow: true },
   };
 }
@@ -17,15 +19,15 @@ const SECTIONS = [
   {
     h: "The short version",
     p: [
-      "This site doesn't track you. No analytics, no ad pixels, no session recorders, no cookie banner — because there's nothing to banner.",
-      "The only data that reaches me is whatever you type into the contact form, and it's used for exactly one thing: letting me reply.",
+      "This site does not use analytics, advertising pixels, or session recorders.",
+      "If you use the contact form, your name, email address, and message are stored so Sampath can reply. If email notifications are configured, the form contents are also sent through Resend.",
     ],
   },
   {
     h: "What gets collected",
     p: [
-      "The contact form sends three fields — your name, email and message — to this site's server. I keep them only so I can write back, and the inbox is capped at the 500 most recent messages (older ones fall off).",
-      "Like virtually every website, the hosting provider also keeps standard server logs: IP address, requested pages, time, browser. Those exist for security and debugging, not for building a profile of you.",
+      "The contact form sends your name, email and message to the site's server. The details are stored with Supabase and can be viewed or deleted by the site owner in the admin inbox; the inbox retains the 500 most recent messages. Resend processes the same details to send an email notification when configured.",
+      "For abuse prevention, the server uses a one-way hash of the request IP with a secret to enforce a contact-form rate limit; it does not store the raw IP in the rate-limit table. Vercel may separately process standard request logs under its own retention and privacy terms.",
     ],
   },
   {
@@ -39,20 +41,20 @@ const SECTIONS = [
     h: "Third parties",
     p: [
       "Fonts load from Google Fonts. When your browser fetches them, Google sees your IP address and processes it under Google's own privacy policy — that's the one external request this page makes.",
-      "Beyond fonts and the hosting provider: no ad networks, no social media embeds, no analytics vendors, no trackers of any kind. Everything else is served directly from this site.",
+      "The site is hosted by Vercel. Portfolio data and uploaded images are stored with Supabase; contact notifications are processed by Resend when configured. These providers process information under their own terms and privacy policies. The site does not embed social feeds or use analytics vendors.",
     ],
   },
   {
     h: "How long it's kept",
     p: [
-      "Contact messages: until I've handled them, with the 500-message cap noted above. Server logs: per the hosting provider's retention policy. Nothing here is kept to profile you, because there's nothing being profiled.",
+      "Contact messages remain in the admin inbox until deleted, up to a maximum of the 500 most recent messages. Provider and server logs follow the respective providers' retention policies. No contact information is used to build an advertising profile.",
     ],
   },
   {
     h: "Your rights",
     p: [
       "You can ask what I hold about you, have it corrected or deleted, or object to it being kept. Email me and I'll take care of it — no forms, no runaround.",
-      "These mirror GDPR-style rights, and I honor them for everyone regardless of where you live.",
+      "Requests are handled by the site owner, subject to applicable law.",
     ],
   },
   {
@@ -70,7 +72,7 @@ const SECTIONS = [
 ];
 
 export default async function PrivacyPage() {
-  const site = getSite();
+  const site = await getSite();
   const email = site.contact?.email || "";
 
   return (

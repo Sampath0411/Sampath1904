@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(_req, { params }) {
   const { id } = await params;
-  const project = getProjects().find((p) => p.id === id || p.slug === id);
+  const project = (await getProjects({ publishedOnly: true })).find((p) => p.id === id || p.slug === id);
   if (!project) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(project);
 }
@@ -21,7 +21,7 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
-  const projects = getProjects();
+  const projects = await getProjects();
   const index = projects.findIndex((p) => p.id === id);
   if (index === -1) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
@@ -49,7 +49,7 @@ export async function PUT(req, { params }) {
     layout: body.layout === "small" ? "small" : "large",
   };
 
-  saveProjects(projects);
+  await saveProjects(projects);
   return NextResponse.json(projects[index]);
 }
 
@@ -58,11 +58,11 @@ export async function DELETE(_req, { params }) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const { id } = await params;
-  const projects = getProjects();
+  const projects = await getProjects();
   const next = projects.filter((p) => p.id !== id);
   if (next.length === projects.length) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
-  saveProjects(next);
+  await saveProjects(next);
   return NextResponse.json({ ok: true });
 }

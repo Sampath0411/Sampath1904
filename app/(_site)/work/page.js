@@ -1,13 +1,20 @@
 import ProjectCard from "@/components/ProjectCard";
 import { getProjects, getSite } from "@/lib/data";
+import { siteBase } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Work | Sampath" };
+export function generateMetadata() {
+  return buildPageMetadata({
+    title: "Selected Work | Sampath",
+    description: "Selected web development, video editing and creative projects by Sampath.",
+    path: "/work",
+  }, siteBase());
+}
 
-export default function WorkPage() {
-  const site = getSite();
-  const projects = getProjects();
+export default async function WorkPage() {
+  const [site, projects] = await Promise.all([getSite(), getProjects({ publishedOnly: true })]);
 
   return (
     <main>

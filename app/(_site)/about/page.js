@@ -2,13 +2,21 @@ import AboutSection from "@/components/sections/AboutSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import Marquee from "@/components/Marquee";
 import { getSite } from "@/lib/data";
+import { siteBase } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "About | Sampath" };
+export function generateMetadata() {
+  return buildPageMetadata({
+    title: "About Sampath | Developer & Video Editor",
+    description: "About Sampath, an independent developer and video editor from Visakhapatnam, India.",
+    path: "/about",
+  }, siteBase());
+}
 
-export default function AboutPage() {
-  const site = getSite();
+export default async function AboutPage() {
+  const site = await getSite();
   return (
     <main>
       <section className="page-hero">

@@ -4,7 +4,7 @@
     "description": "Portfolio of Sampath, a full-stack developer, video editor and creator from Visakhapatnam, India. Web apps, short films, reels and photography.",
     "keywords": "Sampath, portfolio, web developer, video editor, Visakhapatnam",
     "author": "Sampath",
-    "canonical": "https://yourdomain.com/",
+    "canonical": "https://sampathportfolio-ten.vercel.app/",
     "ogImage": "/assets/og.jpg"
   },
   "hero": {

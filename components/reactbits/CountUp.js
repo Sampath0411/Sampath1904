@@ -127,6 +127,7 @@ const buildRoll = (a, b, spin, { compact, decimals, places, separator }) => {
 export default function CountUp({
   to,
   from = 0,
+  initialValue,
   direction = 'up',
   delay = 0,
   duration = 2,
@@ -152,6 +153,7 @@ export default function CountUp({
   const uid = useId().replace(/[^\w-]/g, '');
   const startValue = direction === 'down' ? to : from;
   const endValue = direction === 'down' ? from : to;
+  const beforeStart = initialValue ?? startValue;
   const valueRef = useRef(startValue);
   const startedRef = useRef(false);
   const runningRef = useRef(false);
@@ -178,7 +180,7 @@ export default function CountUp({
     return buildRoll(a, b, !!play?.spin, { compact, decimals, places, separator });
   }, [mode, play, startValue, endValue, compact, decimals, places, separator]);
 
-  const [initialText] = useState(() => formatValue(startValue));
+  const [initialText] = useState(() => formatValue(beforeStart));
   const latestRef = useRef(null);
 
   useIsoLayoutEffect(() => {
@@ -197,9 +199,9 @@ export default function CountUp({
   useIsoLayoutEffect(() => {
     if (!startedRef.current) valueRef.current = startValue;
     if (mode === 'count' && !runningRef.current && textRef.current) {
-      textRef.current.textContent = formatValue(valueRef.current);
+      textRef.current.textContent = formatValue(active ? valueRef.current : beforeStart);
     }
-  }, [mode, startValue, formatValue]);
+  }, [active, beforeStart, mode, startValue, formatValue]);
 
   useEffect(() => {
     if (!active || !startWhen) return;

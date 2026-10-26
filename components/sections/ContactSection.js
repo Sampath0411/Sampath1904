@@ -15,6 +15,7 @@ export default function ContactSection({ contact }) {
       name: fd.get("name"),
       email: fd.get("email"),
       message: fd.get("message"),
+      website: fd.get("website"),
     };
     setStatus({ state: "busy", text: "Sending…" });
     try {
@@ -51,6 +52,10 @@ export default function ContactSection({ contact }) {
           <div>
             <label htmlFor="c-name">{form.nameLabel}</label>
             <input id="c-name" name="name" placeholder={form.namePlaceholder} required />
+          </div>
+          <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+            <label htmlFor="c-website">Leave this field empty</label>
+            <input id="c-website" name="website" tabIndex={-1} autoComplete="off" />
           </div>
           <div>
             <label htmlFor="c-email">{form.emailLabel}</label>

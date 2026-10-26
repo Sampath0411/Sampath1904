@@ -578,7 +578,7 @@ export default function AdminPanel({ initialSite, initialProjects, initialMessag
       {tab === "messages" ? (
         <div className="glass panel">
           <h2>Contact messages</h2>
-          <p className="hint">Sent through the contact form. Stored in data/messages.json.</p>
+          <p className="hint">Messages are retained in the production inbox until deleted (maximum 500). Local development uses data/messages.json.</p>
           {messages.length === 0 ? (
             <p className="empty">No messages yet.</p>
           ) : (

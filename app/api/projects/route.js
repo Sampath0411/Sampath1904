@@ -5,7 +5,7 @@ import { isAuthenticated } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  return NextResponse.json(getProjects());
+  return NextResponse.json(await getProjects({ publishedOnly: true }));
 }
 
 export async function POST(req) {
@@ -17,7 +17,7 @@ export async function POST(req) {
     return NextResponse.json({ error: "Title is required" }, { status: 400 });
   }
 
-  const projects = getProjects();
+  const projects = await getProjects();
   let slug = slugify(body.slug || body.title);
   if (!slug) slug = `project-${Date.now()}`;
   while (projects.some((p) => p.slug === slug)) {
@@ -37,11 +37,12 @@ export async function POST(req) {
     imageAlt: body.imageAlt || "",
     link: body.link || "",
     featured: !!body.featured,
+    published: body.published !== false,
     layout: body.layout === "small" ? "small" : "large",
     gradient: body.gradient || "",
   };
 
   projects.push(project);
-  saveProjects(projects);
+  await saveProjects(projects);
   return NextResponse.json(project, { status: 201 });
 }

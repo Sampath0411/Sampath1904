@@ -2,30 +2,24 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProjectBySlug, getProjects } from "@/lib/data";
 import { Arrow } from "@/components/Icons";
+import { siteBase } from "@/lib/seo";
+import { buildProjectMetadata } from "@/lib/seo-metadata";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return { title: "Project not found | Sampath" };
-  return {
-    title: `${project.title} | Sampath`,
-    description: project.subtitle || project.description?.slice(0, 160),
-    openGraph: {
-      title: project.title,
-      description: project.subtitle,
-      images: project.image ? [{ url: project.image }] : undefined,
-    },
-  };
+  return buildProjectMetadata(project, siteBase());
 }
 
 export default async function ProjectPage({ params }) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
-  const all = getProjects();
+  const all = await getProjects({ publishedOnly: true });
   const index = all.findIndex((p) => p.slug === slug);
   const prev = index > 0 ? all[index - 1] : null;
   const next = index < all.length - 1 ? all[index + 1] : null;

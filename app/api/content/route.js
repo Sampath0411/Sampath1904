@@ -5,7 +5,7 @@ import { isAuthenticated } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  return NextResponse.json(getSite());
+  return NextResponse.json(await getSite());
 }
 
 export async function PUT(req) {
@@ -16,6 +16,6 @@ export async function PUT(req) {
   if (!body || typeof body !== "object") {
     return NextResponse.json({ error: "Invalid content" }, { status: 400 });
   }
-  saveSite(body);
+  await saveSite(body);
   return NextResponse.json({ ok: true });
 }

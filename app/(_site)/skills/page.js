@@ -1,13 +1,21 @@
 import SkillsSection from "@/components/sections/SkillsSection";
 import Marquee from "@/components/Marquee";
 import { getSite } from "@/lib/data";
+import { siteBase } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Skills | Sampath" };
+export function generateMetadata() {
+  return buildPageMetadata({
+    title: "Skills & Tools | Sampath",
+    description: "Development, design and video-editing tools Sampath uses to create digital projects and visual stories.",
+    path: "/skills",
+  }, siteBase());
+}
 
-export default function SkillsPage() {
-  const site = getSite();
+export default async function SkillsPage() {
+  const site = await getSite();
   return (
     <main>
       <section className="page-hero">

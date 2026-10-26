@@ -10,9 +10,8 @@ import { getProjects, getSite } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
-export default function HomePage() {
-  const site = getSite();
-  const projects = getProjects();
+export default async function HomePage() {
+  const [site, projects] = await Promise.all([getSite(), getProjects({ publishedOnly: true })]);
 
   return (
     <main>
