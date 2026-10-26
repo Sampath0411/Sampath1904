@@ -1,0 +1,81 @@
+[
+  {
+    "id": "p_aero_view",
+    "slug": "aero-view",
+    "title": "AERO-VIEW",
+    "subtitle": "3D ULPIN & Vertical Property Mapping System",
+    "description": "A 3D mapping platform that visualizes ULPIN land records and vertical property layers. Built with Next.js and CesiumJS on top of PostgreSQL, it turns flat cadastral data into an interactive city-scale model.",
+    "badge": "Web App",
+    "category": "Development",
+    "tags": [
+      "Next.js",
+      "CesiumJS",
+      "PostgreSQL",
+      "Tailwind"
+    ],
+    "image": "/assets/aero-view.jpg",
+    "imageAlt": "Aerial view of city blocks for the AERO-VIEW project",
+    "link": "",
+    "featured": true,
+    "layout": "large",
+    "gradient": "linear-gradient(135deg,#1d3a52,#0b1a26 60%,#3a5b2a)"
+  },
+  {
+    "id": "p_ushodhya",
+    "slug": "ushodhya-lassi-corner",
+    "title": "Ushodhya Lassi Corner",
+    "subtitle": "Food · Brand · Website",
+    "description": "Brand site for a local lassi shop — menu, story and ordering info with a warm, playful identity. Smooth page transitions and a mobile-first layout built for quick loads on any phone.",
+    "badge": "Web Design",
+    "category": "Design",
+    "tags": [
+      "Next.js",
+      "Framer Motion",
+      "Tailwind"
+    ],
+    "image": "/assets/ushodhya.jpg",
+    "imageAlt": "Mango lassi drink for the Ushodhya Lassi Corner project",
+    "link": "",
+    "featured": true,
+    "layout": "large",
+    "gradient": "linear-gradient(135deg,#2a1a08,#0c0804 70%)"
+  },
+  {
+    "id": "p_travel_edit",
+    "slug": "cinematic-travel-edit",
+    "title": "Cinematic Travel Edit",
+    "subtitle": "Short Film · Editing",
+    "description": "A cinematic travel short cut from raw drone and handheld footage — colour graded, sound designed and paced for a story that hits different.",
+    "badge": "Video Editing",
+    "category": "Video Editing",
+    "tags": [
+      "Premiere Pro",
+      "After Effects"
+    ],
+    "image": "",
+    "imageAlt": "",
+    "link": "",
+    "featured": true,
+    "layout": "small",
+    "gradient": ""
+  },
+  {
+    "id": "p_short_form",
+    "slug": "short-form-content",
+    "title": "Short Form Content",
+    "subtitle": "Reels · Shorts · Edits",
+    "description": "Ongoing series of short-form edits for social — hooks, captions and pacing tuned for reels, shorts and stories.",
+    "badge": "Content Creation",
+    "category": "Content Creation",
+    "tags": [
+      "CapCut",
+      "Premiere Pro"
+    ],
+    "image": "",
+    "imageAlt": "",
+    "link": "",
+    "featured": true,
+    "layout": "small",
+    "gradient": ""
+  }
+]

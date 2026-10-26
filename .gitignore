@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+.env*.local
+npm-debug.log*
+.dist/
+.kombai/
+.playwright-mcp/
+/*.log
+/home-full.png
+/home-viewport.png
+/verify-mobile.png
+/e2e-project-detail.png

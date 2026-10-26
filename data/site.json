@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "title": "Sampath | Developer, Creator & Video Editor",
+    "description": "Portfolio of Sampath, a full-stack developer, video editor and creator from Visakhapatnam, India. Web apps, short films, reels and photography.",
+    "keywords": "Sampath, portfolio, web developer, video editor, Visakhapatnam",
+    "author": "Sampath",
+    "canonical": "https://yourdomain.com/",
+    "ogImage": "/assets/og.jpg"
+  },
+  "hero": {
+    "helloPrefix": "Hey, I'm",
+    "name": "SAMPATH",
+    "roles": [
+      "DEVELOPER",
+      "CREATOR",
+      "VIDEO EDITOR"
+    ],
+    "lead": "I turn ideas into digital experiences, edit moments into stories, and build things that actually matter.",
+    "note": "Just\na guy with\na laptop\nand big\ndreams",
+    "sticker": "BUILD\nEDIT\nCREATE",
+    "ctaPrimary": {
+      "label": "View my work",
+      "href": "/work"
+    },
+    "ctaSecondary": {
+      "label": "Get in touch",
+      "href": "/contact"
+    },
+    "portrait": "/assets/sampath-cutout.png",
+    "portraitAlt": "Stylized 3D portrait of Sampath wearing a hoodie"
+  },
+  "work": {
+    "num": "01.",
+    "title": "Selected",
+    "titleEm": "Projects",
+    "viewAllLabel": "View all projects",
+    "emptyText": "No projects yet — add your first one from the admin panel."
+  },
+  "marquee": {
+    "words": [
+      "BUILD",
+      "EDIT",
+      "CREATE",
+      "BUILD",
+      "EDIT",
+      "CREATE"
+    ]
+  },
+  "skills": {
+    "num": "02.",
+    "title": "Skills",
+    "note": "Tools I\nwork with",
+    "groups": [
+      {
+        "chip": "Development",
+        "chipColor": "lime",
+        "tags": [
+          "Next.js",
+          "React",
+          "Node.js",
+          "MongoDB"
+        ]
+      },
+      {
+        "chip": "Design",
+        "chipColor": "white",
+        "tags": [
+          "Figma",
+          "Photoshop",
+          "Illustrator",
+          "Canva"
+        ]
+      },
+      {
+        "chip": "Video Editing",
+        "chipColor": "lime",
+        "tags": [
+          "Premiere Pro",
+          "After Effects",
+          "DaVinci Resolve",
+          "CapCut"
+        ]
+      },
+      {
+        "chip": "Other",
+        "chipColor": "lime",
+        "tags": [
+          "Git",
+          "VS Code",
+          "Linux"
+        ]
+      }
+    ]
+  },
+  "about": {
+    "num": "03.",
+    "title": "About",
+    "titleEm": "Me",
+    "text": "I'm Sampath, a passionate developer, video editor and creator based in India. I love building clean, useful web apps, editing stories that hit different, and exploring new tech.",
+    "photo": "/assets/sampath-bw.jpg",
+    "photoAlt": "Black and white portrait of Sampath",
+    "caption": "Same person,\nnew ideas.",
+    "buttonLabel": "More about me",
+    "buttonHref": "/about",
+    "stats": [
+      {
+        "value": "2+",
+        "label": "Years of Experience"
+      },
+      {
+        "value": "10+",
+        "label": "Projects Completed"
+      },
+      {
+        "value": "100%",
+        "label": "Passion for Creativity"
+      }
+    ]
+  },
+  "process": {
+    "num": "04.",
+    "title": "How I",
+    "titleEm": "Work",
+    "note": "Click a card,\nor just let it roll ↴",
+    "cards": [
+      {
+        "cat": "Development",
+        "title": "Build",
+        "desc": "Clean, fast web apps with Next.js and React, made to be useful before they're pretty.",
+        "cta": "See my apps",
+        "href": "#work",
+        "linkLabel": "Go to projects"
+      },
+      {
+        "cat": "Video",
+        "title": "Edit",
+        "desc": "Reels, short films and cinematic cuts that hold attention until the very last frame.",
+        "cta": "Watch edits",
+        "href": "#work",
+        "linkLabel": "Go to video work"
+      },
+      {
+        "cat": "Photography",
+        "title": "Capture",
+        "desc": "Portraits, events and product shots with an eye for light, mood and the in-between moments.",
+        "cta": "Book a shoot",
+        "href": "#services",
+        "linkLabel": "Go to services"
+      },
+      {
+        "cat": "UI / UX",
+        "title": "Design",
+        "desc": "Interfaces with handmade details, real typography and zero template energy.",
+        "cta": "My toolkit",
+        "href": "#skills",
+        "linkLabel": "Go to skills"
+      },
+      {
+        "cat": "Launch",
+        "title": "Ship",
+        "desc": "Responsive, SEO-ready and quick to load. Every project goes live polished, not rushed.",
+        "cta": "Live projects",
+        "href": "#work",
+        "linkLabel": "Go to live projects"
+      },
+      {
+        "cat": "Together",
+        "title": "Create",
+        "desc": "Got an idea? Let's turn it into something people actually remember.",
+        "cta": "Say hello",
+        "href": "#contact",
+        "linkLabel": "Go to contact"
+      }
+    ]
+  },
+  "services": {
+    "num": "05.",
+    "title": "My",
+    "titleEm": "Services",
+    "desc": "Ideas to execution. I help brands, creators and individuals bring their vision to life.",
+    "items": [
+      {
+        "icon": "camera",
+        "title": "Photography",
+        "subtitle": "Events • Portraits • Product"
+      },
+      {
+        "icon": "play",
+        "title": "Video Editing",
+        "subtitle": "Reels • Short Films • Content"
+      },
+      {
+        "icon": "code",
+        "title": "Web Development",
+        "subtitle": "Web Apps • Landing Pages • Custom"
+      }
+    ]
+  },
+  "contact": {
+    "num": "06.",
+    "title": "Let's Work",
+    "titleEm": "Together",
+    "note": "Drop a message and I'll get back to you soon!",
+    "email": "sampathlox@gmail.com",
+    "followLabel": "Follow me",
+    "goodVibes": "Good\nVibes\nOnly",
+    "socials": [
+      {
+        "label": "GitHub",
+        "icon": "github",
+        "url": "https://github.com/Sampath0411"
+      },
+      {
+        "label": "LinkedIn",
+        "icon": "linkedin",
+        "url": "https://linkedin.com/in/sampath1904"
+      },
+      {
+        "label": "Instagram",
+        "icon": "instagram",
+        "url": "https://instagram.com/sampath.exe"
+      }
+    ],
+    "form": {
+      "nameLabel": "Name *",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email *",
+      "emailPlaceholder": "your@email.com",
+      "messageLabel": "Message *",
+      "messagePlaceholder": "Tell me about your project...",
+      "submitLabel": "Send message",
+      "successText": "Message sent! I'll get back to you soon."
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 Sampath. All rights reserved."
+  }
+}
