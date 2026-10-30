@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildPageMetadata, buildProjectMetadata, buildSiteMetadata, buildStructuredData, serializeStructuredData } from "../lib/seo-metadata.js";
 
-const base = "https://sampathportfolio-ten.vercel.app";
+const base = "https://sampath-dev.is-a.dev";
 
 test("site metadata uses canonical absolute URLs and optional Search Console verification", () => {
   const metadata = buildSiteMetadata({

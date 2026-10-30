@@ -60,15 +60,15 @@ The portfolio stores contact form name, email, message, and submission time so S
 
 ## Search engines and Google Search Console
 
-The production canonical origin is `https://sampathportfolio-ten.vercel.app/`. Set `SITE_URL` in Vercel to that origin (no trailing slash); update it later if you attach a custom domain. `robots.txt` and `sitemap.xml` are generated from this origin.
+The production canonical origin is `https://sampath-dev.is-a.dev/`. Set `SITE_URL` in Vercel to that origin (no trailing slash); update it later if you attach a custom domain. `robots.txt` and `sitemap.xml` are generated from this origin.
 
 To register the deployed site in Google Search Console:
 
-1. Sign in at [Google Search Console](https://search.google.com/search-console/) and add a **URL-prefix** property for `https://sampathportfolio-ten.vercel.app/`.
+1. Sign in at [Google Search Console](https://search.google.com/search-console/) and add a **URL-prefix** property for `https://sampath-dev.is-a.dev/`.
 2. Choose the **HTML tag** verification method and copy the `content` value Google gives you. Do not paste the whole tag.
 3. Add that value as the `GOOGLE_SITE_VERIFICATION` environment variable in Vercel for Production, then redeploy.
 4. In Search Console, select **Verify**. If Google cannot see the tag, confirm the variable is set for Production and that the latest deploy is live.
-5. In **Indexing → Sitemaps**, submit `https://sampathportfolio-ten.vercel.app/sitemap.xml`.
+5. In **Indexing → Sitemaps**, submit `https://sampath-dev.is-a.dev/sitemap.xml`.
 6. Use **URL inspection** on the homepage and a project page, then request indexing if Google offers the option. Indexing is not guaranteed and may take time.
 
 The Google verification token is intentionally not committed. Search Console ownership verification and sitemap submission require your Google account, so you must perform those final clicks. The sitemap includes public pages/projects only; `/admin` and `/api/` are disallowed by `robots.txt`.
