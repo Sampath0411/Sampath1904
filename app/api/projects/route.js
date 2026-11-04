@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getProjects, saveProjects, newId, slugify } from "@/lib/data";
 import { isAuthenticated } from "@/lib/auth";
+import { ProjectLinkError, normalizeProjectLinks } from "@/lib/project-links";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,16 @@ export async function POST(req) {
   const body = await req.json().catch(() => null);
   if (!body || typeof body !== "object" || !String(body.title || "").trim()) {
     return NextResponse.json({ error: "Title is required" }, { status: 400 });
+  }
+
+  let links;
+  try {
+    links = normalizeProjectLinks(body);
+  } catch (err) {
+    if (err instanceof ProjectLinkError) {
+      return NextResponse.json({ error: err.message }, { status: 400 });
+    }
+    throw err;
   }
 
   const projects = await getProjects();
@@ -35,7 +46,8 @@ export async function POST(req) {
     tags: Array.isArray(body.tags) ? body.tags.map(String).filter(Boolean) : [],
     image: body.image || "",
     imageAlt: body.imageAlt || "",
-    link: body.link || "",
+    link: links.link,
+    repoUrl: links.repoUrl,
     featured: !!body.featured,
     published: body.published !== false,
     layout: body.layout === "small" ? "small" : "large",

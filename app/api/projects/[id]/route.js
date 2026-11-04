@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getProjects, saveProjects, slugify } from "@/lib/data";
 import { isAuthenticated } from "@/lib/auth";
+import { ProjectLinkError, normalizeProjectLinks } from "@/lib/project-links";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,17 @@ export async function PUT(req, { params }) {
 
   const current = projects[index];
 
+  let links;
+  try {
+    links = normalizeProjectLinks(body, current);
+  } catch (err) {
+    if (err instanceof ProjectLinkError) {
+      return NextResponse.json({ error: err.message }, { status: 400 });
+    }
+    throw err;
+  }
+  const { link: _link, repoUrl: _repoUrl, ...rest } = body;
+
   let slug = current.slug;
   if (body.slug !== undefined) {
     slug = slugify(body.slug || current.title);
@@ -38,7 +50,9 @@ export async function PUT(req, { params }) {
 
   projects[index] = {
     ...current,
-    ...body,
+    ...rest,
+    link: links.link,
+    repoUrl: links.repoUrl,
     id: current.id,
     slug,
     title: String(body.title ?? current.title).trim() || current.title,
