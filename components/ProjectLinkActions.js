@@ -33,7 +33,7 @@ export default function ProjectLinkActions({ project }) {
     <div className="project-actions">
       {actions.map((action) => (
         <a
-          key={action.href}
+          key={action.title}
           className="icon-link"
           href={action.href}
           target="_blank"
