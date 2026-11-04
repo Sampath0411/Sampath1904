@@ -39,6 +39,23 @@ test("GitHub repo URLs normalize to canonical repository roots", () => {
   assert.equal(normalizeGitHubRepoUrl("https://www.github.com/owner/repo"), "https://github.com/owner/repo");
 });
 
+test("non-http schemes followed by digits are rejected, not coerced", () => {
+  assert.throws(() => normalizeHttpUrl("javascript:123", "Live Website"), ProjectLinkError);
+  assert.throws(() => normalizeHttpUrl("data:123", "Live Website"), ProjectLinkError);
+  assert.throws(() => normalizeHttpUrl("ftp:88/path", "Live Website"), ProjectLinkError);
+});
+
+test("GitHub repo URLs reject invalid owner and repository names", () => {
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com/-owner/repo"), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com/owner-/repo"), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl(`https://github.com/${"a".repeat(40)}/repo`), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com/owner/re po"), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl(`https://github.com/owner/${"r".repeat(101)}`), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com/owner/."), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com/owner/.."), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com/owner/.git"), ProjectLinkError);
+});
+
 test("GitHub repo URLs reject non-GitHub hosts and non-root paths", () => {
   assert.throws(() => normalizeGitHubRepoUrl("https://gitlab.com/owner/repo"), ProjectLinkError);
   assert.throws(() => normalizeGitHubRepoUrl("https://gitlab.com/owner/repo"), /github\.com/i);
