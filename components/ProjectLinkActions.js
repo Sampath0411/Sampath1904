@@ -1,19 +1,26 @@
 import { BrandIcon, ExternalLink } from "@/components/Icons";
+import { safeHttpHref } from "@/lib/project-links";
 
-export default function ProjectLinkActions({ project, className = "" }) {
+export default function ProjectLinkActions({ project }) {
+  const title = typeof project?.title === "string" ? project.title.trim() : "";
+  const forTitle = title ? ` for ${title}` : "";
+
+  const liveHref = safeHttpHref(project?.link);
+  const repoHref = safeHttpHref(project?.repoUrl);
+
   const actions = [
-    project.link
+    liveHref
       ? {
-          href: project.link,
-          label: "Open Live Website in a new tab",
+          href: liveHref,
+          label: `Open the live website${forTitle} in a new tab`,
           title: "Live Website",
           icon: <ExternalLink size={17} />,
         }
       : null,
-    project.repoUrl
+    repoHref
       ? {
-          href: project.repoUrl,
-          label: "Open GitHub Repo in a new tab",
+          href: repoHref,
+          label: `Open the GitHub repo${forTitle} in a new tab`,
           title: "GitHub Repo",
           icon: <BrandIcon name="github" size={17} />,
         }
@@ -23,14 +30,14 @@ export default function ProjectLinkActions({ project, className = "" }) {
   if (actions.length === 0) return null;
 
   return (
-    <div className={`project-actions${className ? ` ${className}` : ""}`}>
+    <div className="project-actions">
       {actions.map((action) => (
         <a
           key={action.href}
           className="icon-link"
           href={action.href}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           aria-label={action.label}
           title={action.title}
         >

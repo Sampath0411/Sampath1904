@@ -5,7 +5,38 @@ import {
   normalizeGitHubRepoUrl,
   normalizeHttpUrl,
   normalizeProjectLinks,
+  safeHttpHref,
 } from "../lib/project-links.js";
+
+test("safeHttpHref returns null for blank, null and non-string input", () => {
+  assert.equal(safeHttpHref(""), null);
+  assert.equal(safeHttpHref("   "), null);
+  assert.equal(safeHttpHref(null), null);
+  assert.equal(safeHttpHref(undefined), null);
+  assert.equal(safeHttpHref(42), null);
+  assert.equal(safeHttpHref({}), null);
+  assert.equal(safeHttpHref(["https://example.com"]), null);
+});
+
+test("safeHttpHref returns canonical URLs for valid http(s) input", () => {
+  assert.equal(safeHttpHref("https://example.com"), "https://example.com/");
+  assert.equal(safeHttpHref(" http://example.com/path?a=1#top "), "http://example.com/path?a=1#top");
+  assert.equal(safeHttpHref("https://example.com:8080/app"), "https://example.com:8080/app");
+});
+
+test("safeHttpHref rejects non-http schemes and malformed input", () => {
+  assert.equal(safeHttpHref("javascript:alert(1)"), null);
+  assert.equal(safeHttpHref("data:text/html,x"), null);
+  assert.equal(safeHttpHref("ftp://example.com"), null);
+  assert.equal(safeHttpHref("https://"), null);
+  assert.equal(safeHttpHref("example.com"), null);
+});
+
+test("safeHttpHref rejects URLs with userinfo", () => {
+  assert.equal(safeHttpHref("https://user:pass@example.com/"), null);
+  assert.equal(safeHttpHref("https://user@example.com/x"), null);
+  assert.equal(safeHttpHref("https://github.com@evil.com/x"), null);
+});
 
 test("blank links normalize to empty strings", () => {
   assert.deepEqual(normalizeProjectLinks({ link: "", repoUrl: "   " }), {
