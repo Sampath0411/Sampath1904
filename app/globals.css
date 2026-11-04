@@ -93,6 +93,11 @@ h2 em{font-style:normal;color:var(--lime)}
 .proj.small{padding:20px}
 .proj.small h3{font-size:17px}
 .proj.no-hover:hover{transform:none}
+.project-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+.project-actions{display:flex;align-items:center;gap:8px}
+.icon-link{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--lime);transition:border-color .2s,background .2s,transform .2s}
+.icon-link:hover{border-color:var(--lime);background:rgba(200,255,0,.08);transform:translateY(-2px)}
+.icon-link:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
 
 /* marquee — React Bits TextLoop along a gentle wave, clipped to a band */
 .marquee{border-block:1px solid var(--line);overflow:hidden;padding:14px 0;margin:20px 0;background:#0d0d0d}
