@@ -40,10 +40,53 @@ test("GitHub repo URLs normalize to canonical repository roots", () => {
 });
 
 test("GitHub repo URLs reject non-GitHub hosts and non-root paths", () => {
+  assert.throws(() => normalizeGitHubRepoUrl("https://gitlab.com/owner/repo"), ProjectLinkError);
   assert.throws(() => normalizeGitHubRepoUrl("https://gitlab.com/owner/repo"), /github\.com/i);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com/owner"), ProjectLinkError);
   assert.throws(() => normalizeGitHubRepoUrl("https://github.com/owner"), /repository root/i);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com/owner/repo/tree/main"), ProjectLinkError);
   assert.throws(() => normalizeGitHubRepoUrl("https://github.com/owner/repo/tree/main"), /repository root/i);
+  assert.throws(() => normalizeGitHubRepoUrl("http://github.com/owner/repo"), ProjectLinkError);
   assert.throws(() => normalizeGitHubRepoUrl("http://github.com/owner/repo"), /https/i);
+});
+
+test("GitHub repo URLs reject ambiguous or non-canonical URLs", () => {
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com"), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com"), /repository root/i);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com/"), /repository root/i);
+  assert.throws(() => normalizeGitHubRepoUrl("https://github.com:8080/owner/repo"), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl("github.com:8080/owner/repo"), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl("https://user:pass@github.com/owner/repo"), ProjectLinkError);
+  assert.throws(() => normalizeGitHubRepoUrl("https://user@github.com/owner/repo"), ProjectLinkError);
+});
+
+test("GitHub repo URLs accept www-prefixed host and canonicalize", () => {
+  assert.equal(
+    normalizeGitHubRepoUrl("https://www.github.com/owner/repo"),
+    "https://github.com/owner/repo"
+  );
+});
+
+test("GitHub repo URLs keep .git suffix, trailing slash and query/fragment stripping", () => {
+  assert.equal(
+    normalizeGitHubRepoUrl("https://github.com/owner/repo.git"),
+    "https://github.com/owner/repo"
+  );
+  assert.equal(
+    normalizeGitHubRepoUrl("https://github.com/owner/repo/"),
+    "https://github.com/owner/repo"
+  );
+  assert.equal(
+    normalizeGitHubRepoUrl("https://github.com/owner/repo?tab=readme#readme"),
+    "https://github.com/owner/repo"
+  );
+});
+
+test("blank GitHub repo URLs normalize to empty strings", () => {
+  assert.equal(normalizeGitHubRepoUrl(""), "");
+  assert.equal(normalizeGitHubRepoUrl("   "), "");
+  assert.equal(normalizeGitHubRepoUrl(null), "");
+  assert.equal(normalizeGitHubRepoUrl(undefined), "");
 });
 
 test("normalizeProjectLinks preserves omitted fields and normalizes supplied fields", () => {
