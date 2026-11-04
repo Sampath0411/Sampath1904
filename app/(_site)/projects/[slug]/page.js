@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProjectBySlug, getProjects } from "@/lib/data";
-import { Arrow } from "@/components/Icons";
+import { Arrow, BrandIcon } from "@/components/Icons";
+import { safeHttpHref } from "@/lib/project-links";
 import { siteBase } from "@/lib/seo";
 import { buildProjectMetadata } from "@/lib/seo-metadata";
 
@@ -23,6 +24,9 @@ export default async function ProjectPage({ params }) {
   const index = all.findIndex((p) => p.slug === slug);
   const prev = index > 0 ? all[index - 1] : null;
   const next = index < all.length - 1 ? all[index + 1] : null;
+
+  const liveWebsite = safeHttpHref(project.link);
+  const githubRepo = safeHttpHref(project.repoUrl);
 
   return (
     <main>
@@ -65,9 +69,14 @@ export default async function ProjectPage({ params }) {
           {project.description ? <p className="body">{project.description}</p> : null}
 
           <div className="cta">
-            {project.link ? (
-              <a href={project.link} target="_blank" rel="noreferrer" className="btn btn-lime">
-                Open project <Arrow />
+            {liveWebsite ? (
+              <a href={liveWebsite} target="_blank" rel="noopener noreferrer" className="btn btn-lime">
+                Live Website <Arrow />
+              </a>
+            ) : null}
+            {githubRepo ? (
+              <a href={githubRepo} target="_blank" rel="noopener noreferrer" className="btn btn-glass">
+                <BrandIcon name="github" size={18} /> GitHub Repo
               </a>
             ) : null}
             <Link href="/contact" className="btn btn-glass">
