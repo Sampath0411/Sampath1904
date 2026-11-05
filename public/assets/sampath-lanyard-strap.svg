@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="192" viewBox="0 0 768 192">
+  <rect width="768" height="192" fill="#C8FF00"/>
+  <path d="M0 14h768M0 178h768" stroke="#0A0A0A" stroke-opacity=".22" stroke-width="8"/>
+  <text x="384" y="126" text-anchor="middle" fill="#0A0A0A" font-family="Arial, sans-serif" font-size="96" font-weight="800" letter-spacing="8">✦ SAMPATH ✦</text>
+</svg>

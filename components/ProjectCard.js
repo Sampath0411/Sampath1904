@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Arrow } from "@/components/Icons";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
+import ProjectLinkActions from "@/components/ProjectLinkActions";
 
 /**
  * Project card used on the home page and the work page.
@@ -35,9 +36,12 @@ export default function ProjectCard({ project, small = false }) {
           <span className="tag" key={t}>{t}</span>
         ))}
       </div>
-      <Link href={`/projects/${project.slug}`} className="btn btn-lime btn-sm">
-        View project <Arrow size={13} />
-      </Link>
+      <div className="project-footer">
+        <Link href={`/projects/${project.slug}`} className="btn btn-lime btn-sm">
+          View project <Arrow size={13} />
+        </Link>
+        <ProjectLinkActions project={project} />
+      </div>
     </>
   ) : (
     <>
@@ -49,9 +53,12 @@ export default function ProjectCard({ project, small = false }) {
           <span className="tag" key={t}>{t}</span>
         ))}
       </div>
-      <Link href={`/projects/${project.slug}`} className="btn btn-lime btn-sm">
-        View project <Arrow size={13} />
-      </Link>
+      <div className="project-footer">
+        <Link href={`/projects/${project.slug}`} className="btn btn-lime btn-sm">
+          View project <Arrow size={13} />
+        </Link>
+        <ProjectLinkActions project={project} />
+      </div>
     </>
   );
 

@@ -556,8 +556,8 @@ const GlowCursor = ({
 
     const resize = () => {
       const s = settingsRef.current;
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
       if (width < 1 || height < 1) return;
       const ratio = Math.min(window.devicePixelRatio || 1, Math.max(0.5, s.maxDevicePixelRatio || 2));
       const pixelWidth = Math.max(1, Math.round(width * ratio));
@@ -849,10 +849,9 @@ const GlowCursor = ({
     };
 
     const onPointerMove = event => {
-      const rect = container.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      const inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
+      const x = event.clientX;
+      const y = event.clientY;
+      const inside = x >= 0 && y >= 0 && x <= window.innerWidth && y <= window.innerHeight;
       if (!inside) {
         if (state.pointer.inside) {
           state.pointer.inside = false;
@@ -880,10 +879,9 @@ const GlowCursor = ({
     const onPointerDown = event => {
       const s = settingsRef.current;
       if (!s.clickBurst || !s.enabled) return;
-      const rect = container.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+      const x = event.clientX;
+      const y = event.clientY;
+      if (x < 0 || y < 0 || x > window.innerWidth || y > window.innerHeight) return;
       state.bursts.push([x, y]);
       wake();
     };
@@ -899,11 +897,11 @@ const GlowCursor = ({
       wake();
     };
 
-    const resizeObserver = new ResizeObserver(() => {
+    const onResize = () => {
       resize();
       wake();
-    });
-    resizeObserver.observe(container);
+    };
+    window.addEventListener('resize', onResize, { passive: true });
     const intersection = new IntersectionObserver(entries => {
       visible = entries.some(entry => entry.isIntersecting);
       if (visible) {
@@ -922,7 +920,7 @@ const GlowCursor = ({
     return () => {
       alive = false;
       cancelAnimationFrame(raf);
-      resizeObserver.disconnect();
+      window.removeEventListener('resize', onResize);
       intersection.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerdown', onPointerDown);

@@ -32,7 +32,7 @@ export default function Hero({ hero }) {
     <section className="hero" id="home" ref={sectionRef} style={{ backgroundColor: "#0A0A0A" }}>
       <div className="hero-particles">
         <Particles
-          particleCount={150}
+          particleCount={210}
           particleSpread={9}
           speed={0.06}
           particleColors={["#C8FF00", "#ffffff"]}
@@ -41,10 +41,10 @@ export default function Hero({ hero }) {
           twinkle={0.35}
           drift="up"
           driftSpeed={0.5}
-          hoverEffect="parallax"
-          particleHoverFactor={0.6}
-          hoverRadius={170}
-          opacity={0.5}
+          hoverEffect="repel"
+          particleHoverFactor={1.15}
+          hoverRadius={210}
+          opacity={0.72}
         />
       </div>
 

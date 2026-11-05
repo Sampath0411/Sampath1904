@@ -196,6 +196,11 @@
       }
     ]
   },
+  "animate": {
+    "sticker1": "Create Anything",
+    "sticker2": "That's right, Anything",
+    "body": "Whether it's a web app, a reel edit or a bold visual identity, I craft interfaces that feel alive and experiences people actually remember."
+  },
   "contact": {
     "num": "06.",
     "title": "Let's Work",

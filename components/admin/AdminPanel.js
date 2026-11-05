@@ -4,6 +4,7 @@ import { Fragment, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ImagePicker from "@/components/admin/ImagePicker";
+import { normalizeProjectLinks, ProjectLinkError } from "@/lib/project-links";
 
 /* ---------- tiny form primitives ---------- */
 
@@ -111,6 +112,7 @@ export default function AdminPanel({ initialSite, initialProjects, initialMessag
       image: "",
       imageAlt: "",
       link: "",
+      repoUrl: "",
       featured: true,
       layout: "large",
       gradient: "",
@@ -132,11 +134,23 @@ export default function AdminPanel({ initialSite, initialProjects, initialMessag
     if (!draft.title.trim()) return flash("err", "Project title is required.");
     setBusy(true);
     try {
+      let links;
+      try {
+        links = normalizeProjectLinks(draft);
+      } catch (err) {
+        if (err instanceof ProjectLinkError) {
+          flash("err", err.message);
+          setBusy(false);
+          return;
+        }
+        throw err;
+      }
+      const payload = { ...draft, ...links };
       const isNew = !draft.id;
       const res = await fetch(isNew ? "/api/projects" : `/api/projects/${draft.id}`, {
         method: isNew ? "POST" : "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(draft),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Save failed");
@@ -538,7 +552,8 @@ export default function AdminPanel({ initialSite, initialProjects, initialMessag
                 <Field label="Category" value={draft.category} onChange={(v) => updDraft("category", v)} placeholder="Development" />
                 <Field label="Tags (comma separated)" value={comma(draft.tags)} onChange={(v) => updDraft("tags", split(v))} />
                 <Field label="Description" textarea value={draft.description} onChange={(v) => updDraft("description", v)} full />
-                <Field label="External link" value={draft.link} onChange={(v) => updDraft("link", v)} placeholder="https://…" />
+                <Field label="Live Website" value={draft.link} onChange={(v) => updDraft("link", v)} placeholder="https://example.com" />
+                <Field label="GitHub Repo" value={draft.repoUrl ?? ""} onChange={(v) => updDraft("repoUrl", v)} placeholder="https://github.com/owner/repo" />
                 <Field label="Card gradient (CSS)" value={draft.gradient} onChange={(v) => updDraft("gradient", v)} placeholder="optional, used when no image" />
                 <ImagePicker
                   label="Cover photo"
