@@ -5,6 +5,8 @@ import SkillsSection from "@/components/sections/SkillsSection";
 import AboutSection from "@/components/sections/AboutSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import ServicesSection from "@/components/sections/ServicesSection";
+import AnimateAnythingSection from "@/components/sections/AnimateAnythingSection";
+import LanyardSection from "@/components/sections/LanyardSection";
 import ContactSection from "@/components/sections/ContactSection";
 import { getProjects, getSite } from "@/lib/data";
 
@@ -22,6 +24,8 @@ export default async function HomePage() {
       <AboutSection about={site.about} />
       <ProcessSection process={site.process} />
       <ServicesSection services={site.services} />
+      <AnimateAnythingSection animate={site.animate} />
+      <LanyardSection />
       <ContactSection contact={site.contact} />
     </main>
   );

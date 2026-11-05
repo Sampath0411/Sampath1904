@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1440" viewBox="0 0 960 1440">
+  <rect width="960" height="1440" rx="72" fill="#10120b"/>
+  <path d="M0 0h960v390H0z" fill="#C8FF00"/>
+  <path d="M70 420h820" stroke="#C8FF00" stroke-width="4" opacity=".78"/>
+  <text x="78" y="128" fill="#0A0A0A" font-family="Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="9">✦ STUDENT ID ✦</text>
+  <text x="78" y="250" fill="#0A0A0A" font-family="Arial, sans-serif" font-size="78" font-weight="800">Sampath Satya</text>
+  <text x="78" y="340" fill="#0A0A0A" font-family="Arial, sans-serif" font-size="78" font-weight="800">Saran</text>
+  <text x="78" y="470" fill="#C8FF00" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="5">COLLEGE</text>
+  <text x="78" y="540" fill="#F2F2EC" font-family="Arial, sans-serif" font-size="54" font-weight="700">Andhra University</text>
+  <text x="78" y="605" fill="#F2F2EC" font-family="Arial, sans-serif" font-size="42">College</text>
+  <text x="78" y="750" fill="#C8FF00" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="5">YEAR</text>
+  <text x="78" y="825" fill="#F2F2EC" font-family="Arial, sans-serif" font-size="58" font-weight="700">2nd Year</text>
+  <path d="M78 915h804" stroke="#ffffff" stroke-width="2" opacity=".2"/>
+  <text x="78" y="1025" fill="#F2F2EC" font-family="Arial, sans-serif" font-size="34">Curious mind. Hands-on maker.</text>
+  <text x="78" y="1110" fill="#F2F2EC" font-family="Arial, sans-serif" font-size="34">Always learning, always building.</text>
+  <text x="78" y="1315" fill="#C8FF00" font-family="Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="8">✦ SAMPATH ✦</text>
+</svg>

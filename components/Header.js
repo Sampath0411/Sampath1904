@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Arrow } from "@/components/Icons";
+import { Arrow, Crown } from "@/components/Icons";
+import PillNav from "@/components/reactbits/PillNav";
 
 const LINKS = [
   { label: "Home", href: "/" },
@@ -13,62 +13,43 @@ const LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-function Burger({ open }) {
-  return (
-    <svg className="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
-      {open ? (
-        <path d="M6 6l12 12M18 6L6 18" />
-      ) : (
-        <path d="M4 7h16M4 12h16M4 17h16" />
-      )}
-    </svg>
-  );
-}
-
 export default function Header() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  /* close the mobile menu whenever the route changes */
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  // PillNav uses uncontrolled selected state but we feed activeHref so it
+  // always reflects the current route.
+  const activeHref = LINKS.find(
+    (l) => (pathname === "/" ? l.href === "/" : pathname.startsWith(l.href) && l.href !== "/")
+  )?.href;
 
   return (
-    <header className="site-header">
-      <Link href="/" className="logo" aria-label="Sampath home">
-        S
+    <div className="hdr-wrap">
+      <PillNav
+        logo={<Crown size={18} />}
+        logoAlt="Sampath home"
+        logoHref="/"
+        items={LINKS}
+        activeHref={activeHref}
+        linkComponent={Link}
+        theme="dark"
+        layout="joined"
+        itemStyle="pill"
+        hoverEffect="fill"
+        indicator="dot"
+        surface="glass"
+        barColor="rgba(255,255,255,0.08)"
+        size="md"
+        highlightColor="#C8FF00"
+        highlightTextColor="#0A0A0A"
+        textColor="#F2F2EC"
+        bounce={0.3}
+        stretch={0.5}
+        intro
+        collapse="auto"
+        ariaLabel="Main"
+      />
+      <Link href="/contact" className="btn btn-lime hdr-cta">
+        Hire me <span aria-hidden="true"><Arrow /></span>
       </Link>
-      <nav aria-label="Main" className={menuOpen ? "open" : ""}>
-        <ul>
-          {LINKS.map((l) => {
-            const on = isHome ? l.href === "/" : pathname.startsWith(l.href) && l.href !== "/";
-            return (
-              <li key={l.href}>
-                <Link href={l.href} className={on ? "on" : ""}>
-                  {l.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-      <div className="hdr-right">
-        <Link href="/contact" className="btn btn-lime hdr-cta">
-          Hire me <span aria-hidden="true"><Arrow /></span>
-        </Link>
-        <button
-          type="button"
-          className="burger"
-          aria-expanded={menuOpen}
-          aria-controls="site-nav"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMenuOpen((v) => !v)}
-        >
-          <Burger open={menuOpen} />
-        </button>
-      </div>
-    </header>
+    </div>
   );
 }
