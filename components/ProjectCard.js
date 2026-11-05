@@ -28,6 +28,7 @@ export default function ProjectCard({ project, small = false }) {
 
   const inner = small ? (
     <>
+      {thumb}
       {project.badge ? <span className="tag">{project.badge}</span> : null}
       <h3>{project.title}</h3>
       <p className="sub" style={{ marginBottom: 8 }}>{project.subtitle}</p>
