@@ -2,20 +2,21 @@
   {
     "id": "p_aero_view",
     "slug": "aero-view",
-    "title": "AERO-VIEW",
-    "subtitle": "3D ULPIN & Vertical Property Mapping System",
-    "description": "A 3D mapping platform that visualizes ULPIN land records and vertical property layers. Built with Next.js and CesiumJS on top of PostgreSQL, it turns flat cadastral data into an interactive city-scale model.",
+    "title": "PS26011 3D Building Map",
+    "subtitle": "AERO-VIEW · 3D ULPIN & Vertical Property Mapper",
+    "description": "An interactive 3D cadastral viewer for Siripuram, Visakhapatnam. Explore buildings as parcel-to-unit stacks, inspect underground utility corridors, and see provenance for real, estimated, and synthetic demo data.",
     "badge": "Web App",
     "category": "Development",
     "tags": [
       "Next.js",
       "CesiumJS",
-      "PostgreSQL",
-      "Tailwind"
+      "PostGIS",
+      "TypeScript"
     ],
     "image": "/assets/aero-view.jpg",
     "imageAlt": "Aerial view of city blocks for the AERO-VIEW project",
-    "link": "",
+    "link": "https://ps-26011-3-d-building-map.vercel.app",
+    "repoUrl": "https://github.com/Sampath0411/PS26011-3D-Building-Map",
     "featured": true,
     "layout": "large",
     "gradient": "linear-gradient(135deg,#1d3a52,#0b1a26 60%,#3a5b2a)"
@@ -77,5 +78,116 @@
     "featured": true,
     "layout": "small",
     "gradient": ""
+  },
+  {
+    "id": "p_glance_windows",
+    "slug": "glance-windows",
+    "title": "Glance for Windows",
+    "subtitle": "On-device face unlock for Windows 11",
+    "description": "A native Windows desktop app that adds a glance-based face-unlock flow using a standard webcam. Face processing runs locally with ONNX Runtime and InsightFace; it is designed as a convenience feature, not a replacement for Windows Hello security.",
+    "badge": "Desktop App",
+    "category": "Development",
+    "tags": [
+      "Python",
+      "PySide6",
+      "ONNX Runtime",
+      "Windows 11"
+    ],
+    "image": "",
+    "imageAlt": "",
+    "link": "",
+    "repoUrl": "https://github.com/Sampath0411/glance-windows",
+    "featured": false,
+    "layout": "small",
+    "gradient": "linear-gradient(135deg,#162b54,#0a1225 70%,#334b7a)"
+  },
+  {
+    "id": "p_devsocio",
+    "slug": "devsocio",
+    "title": "DevSocio",
+    "subtitle": "A social platform concept for developers",
+    "description": "A developer-first community platform concept for sharing projects, meeting collaborators, and discovering opportunities. The repository describes an early-stage product with planned social, real-time, and AI-assisted features.",
+    "badge": "Product Concept",
+    "category": "Development",
+    "tags": [
+      "React",
+      "Firebase",
+      "Node.js",
+      "AI"
+    ],
+    "image": "",
+    "imageAlt": "",
+    "link": "https://devsocio-black.vercel.app",
+    "repoUrl": "https://github.com/Sampath0411/Devsocio",
+    "featured": false,
+    "layout": "small",
+    "gradient": "linear-gradient(135deg,#31236a,#11102a 70%,#304c72)"
+  },
+  {
+    "id": "p_resume_pulse",
+    "slug": "resume-pulse",
+    "title": "ResumePulse",
+    "subtitle": "ATS-friendly resume builder",
+    "description": "A responsive resume builder with a guided multi-step form, live preview, and ATS-friendly formatting. The project pairs a lightweight HTML/CSS/JavaScript frontend with a Node.js and Express backend.",
+    "badge": "Web App",
+    "category": "Development",
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Node.js",
+      "Express"
+    ],
+    "image": "",
+    "imageAlt": "",
+    "link": "https://resumepulse-zeta.vercel.app",
+    "repoUrl": "https://github.com/Sampath0411/Resumepulse",
+    "featured": false,
+    "layout": "small",
+    "gradient": "linear-gradient(135deg,#173f5d,#0a1827 70%,#226a79)"
+  },
+  {
+    "id": "p_agrishield",
+    "slug": "agrishield-ai",
+    "title": "AgriShield AI",
+    "subtitle": "Rice disease intelligence for farmers",
+    "description": "An agricultural support platform focused on rice farming, combining leaf-disease detection with treatment guidance, weather insights, multilingual assistance, and a farmer community. The repository pairs a Next.js frontend with a FastAPI and TensorFlow backend.",
+    "badge": "AI · Agriculture",
+    "category": "Development",
+    "tags": [
+      "Next.js",
+      "FastAPI",
+      "TensorFlow",
+      "Supabase"
+    ],
+    "image": "",
+    "imageAlt": "",
+    "link": "https://agrishield-landing.vercel.app/",
+    "repoUrl": "https://github.com/Sampath0411/agrishield-ai",
+    "featured": false,
+    "layout": "small",
+    "gradient": "linear-gradient(135deg,#164d37,#0a201a 70%,#72922e)"
+  },
+  {
+    "id": "p_swiggy_lifeos",
+    "slug": "swiggy-lifeos",
+    "title": "Swiggy LifeOS",
+    "subtitle": "AI lifestyle assistant built around Swiggy MCP",
+    "description": "A concept lifestyle operating system that brings meal planning, grocery restocking, dining, and daily routines into one conversational agent. The web experience demonstrates cross-service workflows using Swiggy MCP.",
+    "badge": "AI · MCP",
+    "category": "Development",
+    "tags": [
+      "React",
+      "TypeScript",
+      "TanStack Start",
+      "MCP"
+    ],
+    "image": "",
+    "imageAlt": "",
+    "link": "https://swiggy-life-ai.vercel.app",
+    "repoUrl": "https://github.com/Sampath0411/swiggy-life-ai",
+    "featured": false,
+    "layout": "small",
+    "gradient": "linear-gradient(135deg,#54210f,#21130f 70%,#87410f)"
   }
 ]
