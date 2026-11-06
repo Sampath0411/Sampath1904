@@ -14,6 +14,11 @@ test("cursor effect uses a viewport-fixed canvas and viewport pointer coordinate
   assert.match(cursor, /const y = event\.clientY\s*;/);
 });
 
+test("cursor canvas is layered behind page content", () => {
+  assert.match(styles, /\.glow-cursor__canvas\s*\{[^}]*z-index:\s*0/s);
+  assert.match(styles, /\.glow-cursor__content\s*\{[^}]*z-index:\s*1/s);
+});
+
 test("global cursor preserves its original intensity and trail appearance", () => {
   assert.match(layout, /<GlowCursor[^>]*intensity=\{1\.1\}[^>]*trailWidth=\{2\.5\}[^>]*glow=\{0\.9\}[^>]*clickBurst=\{false\}[^>]*grain=\{0\.02\}/s);
   assert.doesNotMatch(layout, /linger=\{0\.3\}|hotspot=\{0\.5\}|followSpeed=\{0\.85\}/);
